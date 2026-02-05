@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astral Technologie | System Override</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES DE COULEURS --- */
+        :root {
+            --bg-deep: #0a0202; /* Fond très sombre, teinte rouge */
+            --red-primary: #d32f2f; /* Rouge standard */
+            --red-bright: #ff1744; /* Rouge vif pour les accents */
+            --text-dim: #b07d7d; /* Texte secondaire */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: var(--bg-deep);
+            color: var(--red-primary);
+            font-family: 'Roboto Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* --- ARRIÈRE-PLAN ANIMÉ (RÉSEAU SUBTIL) --- */
+        .bg-animation {
+            position: absolute;
+            top: 0; left: 0; width: 200%; height: 200%;
+            background-image: 
+                linear-gradient(rgba(255, 23, 68, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 23, 68, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px, 50px 50px;
+            background-position: -1px -1px, -1px -1px;
+            transform: perspective(500px) rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        /* Ajout d'un vignetage sombre pour focus sur le centre */
+        body::after {
+            content: '';
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+            background: radial-gradient(circle, transparent 40%, var(--bg-deep) 90%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* --- CONTENEUR PRINCIPAL --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+            /* Effet de verre sombre et rouge */
+            background: rgba(40, 10, 10, 0.7);
+            border: 1px solid rgba(255, 23, 68, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            opacity: 0; /* Caché au départ pour l'anim d'intro */
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        /* --- LOGO GRAND ET CENTRAL --- */
+        .logo-box {
+            margin-bottom: 40px;
+        }
+        .logo-img {
+            /* Ajuste la taille ici si besoin (ex: 250px ou 300px) */
+            max-width: 220px; 
+            height: auto;
+            /* Lueur rouge diffuse sous le logo */
+            filter: drop-shadow(0 0 20px rgba(255, 23, 68, 0.4));
+        }
+
+        /* --- TYPOGRAPHIE ET TEXTE STABLE --- */
+        h1 {
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin: 0 0 10px 0;
+            color: #fff; /* Titre principal en blanc pour le contraste */
+            text-shadow: 0 0 10px var(--red-primary);
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--red-primary);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--red-bright);
+        }
+
+        /* --- BARRE DE CHARGEMENT ÉLÉGANTE --- */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 23, 68, 0.2);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--red-bright);
+            box-shadow: 0 0 10px var(--red-bright);
+            /* Animation lente et fluide qui s'arrête à 85% */
+            animation: loadProgress 4s ease-in-out forwards;
+        }
+
+        .final-msg {
+            font-size: 1.1rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        /* --- ANIMATIONS CSS --- */
+        /* Mouvement de la grille de fond */
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100px; }
+        }
+        /* Apparition douce du contenu */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        /* Remplissage de la barre */
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            60% { width: 40%; }
+            100% { width: 85%; }
+        }
+
+        /* Responsive pour mobile */
+        @media (max-width: 600px) {
+            .logo-img { max-width: 150px; }
+            h1 { font-size: 1.5rem; }
+            .container { padding: 20px; width: 85%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animation"></div>
+
+    <div class="container">
+        <div class="logo-box">
+            <img src="logo.png" alt="Astral Technologie Logo" class="logo-img">
+        </div>
+
+        <h1>Astral Technologie</h1>
+        <div class="subtitle">ADVANCED SYSTEMS DIVISION</div>
+
+        <div style="text-align: left; margin-top: 30px;">
+            <div class="status-row">
+                <span>> PROTOCOL:</span>
+                <span>SECURE_BOOT_V4</span>
+            </div>
+            <div class="status-row">
+                <span>> SERVER STATUS:</span>
+                <span style="color: #fff; background: var(--red-primary); padding: 2px 5px;">RESTRICTED ACCESS</span>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <p class="final-msg">PLATEFORME DISPONIBLE PROCHAINEMENT.</p>
+    </div>
+
+</body>
+</html>
