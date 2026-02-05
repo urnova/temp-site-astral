@@ -3,212 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astral Technologie - Initialisation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Astral Technologie - Accès Restreint</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Reset et styles de base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* --- CONFIGURATION COULEURS --- */
+        :root {
+            --primary-red: #ff1f1f;   /* Rouge vif néon */
+            --dark-red: #4a0000;      /* Rouge sombre fond */
+            --bg-color: #050000;      /* Noir quasi total */
+            --text-color: #e0e0e0;    /* Blanc cassé pro */
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
             height: 100%;
             font-family: 'Montserrat', sans-serif;
-            background-color: #02020e; /* Noir profond bleuté */
-            overflow: hidden; /* Empêche le défilement */
+            background-color: var(--bg-color);
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #fff;
+            color: var(--text-color);
         }
 
-        /* --- Animation d'arrière-plan Sci-Fi --- */
-        .background-container {
+        /* --- FOND ANIMÉ STYLE "DATA CENTER" --- */
+        .grid-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            /* Création d'une grille perspective qui bouge */
+            /* Grille rouge subtile */
             background: 
-                linear-gradient(rgba(0, 247, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 247, 255, 0.1) 1px, transparent 1px),
-                radial-gradient(circle at center, rgba(2, 2, 14, 0.3) 0%, #02020e 100%);
-            background-size: 50px 50px, 50px 50px, 100% 100%;
-            background-position: center center;
+                linear-gradient(rgba(255, 31, 31, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 31, 31, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
             transform: perspective(500px) rotateX(60deg);
-            animation: moveGrid 5s linear infinite;
+            animation: moveGrid 10s linear infinite;
+            box-shadow: inset 0 0 100px #000;
         }
 
         @keyframes moveGrid {
-            0% { background-position: 0 0, 0 0, center center; }
-            100% { background-position: 0 50px, 0 50px, center center; }
+            0% { background-position: 0 0; }
+            100% { background-position: 0 40px; }
         }
 
-        /* Ajout d'étoiles/particules lointaines */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 130px 80px, #ffffff, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            opacity: 0.5;
-            animation: twinkle 4s infinite;
-        }
-        
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            50% { opacity: 0.7; }
-            100% { opacity: 0.3; }
+        /* Effet vignetage rouge (assombrissement des bords) */
+        .vignette {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 50%, rgba(50, 0, 0, 0.6) 100%);
+            z-index: -1;
+            pointer-events: none;
         }
 
-
-        /* --- Conteneur Principal (Effet verre) --- */
-        .main-container {
+        /* --- CONTENEUR PRINCIPAL --- */
+        .glass-panel {
             text-align: center;
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            /* Effet "Glassmorphism" (verre dépoli) */
-            background: rgba(10, 10, 30, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 247, 255, 0.2);
-            box-shadow: 0 0 30px rgba(0, 247, 255, 0.1);
+            padding: 3rem;
+            border-radius: 12px;
+            /* Verre fumé sombre */
+            background: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            /* Bordure fine rouge */
+            border: 1px solid rgba(255, 31, 31, 0.3);
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.15);
             max-width: 90%;
-            width: 600px;
-            animation: fadeInUp 1.5s ease-out;
-        }
-
-        /* --- Typographie et Effets --- */
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            letter-spacing: 4px;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            /* Dégradé de texte néon */
-            background: linear-gradient(90deg, #00f7ff, #bc13fe, #00f7ff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-        }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
-        .status-bar {
-            display: inline-block;
-            margin-bottom: 2rem;
-            padding: 0.5rem 1.5rem;
-            background: rgba(0, 247, 255, 0.1);
-            border-left: 3px solid #00f7ff;
-            border-right: 3px solid #00f7ff;
-            font-family: 'Orbitron', sans-serif;
-            color: #00f7ff;
-            font-weight: 700;
-            letter-spacing: 2px;
+            width: 550px;
             position: relative;
-            overflow: hidden;
         }
-        
-        /* Ligne de scan qui passe sur le statut */
-        .status-bar::after {
+
+        /* Ligne rouge brillante en haut du cadre */
+        .glass-panel::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 247, 255, 0.4), transparent);
-            animation: scan 2s infinite;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            box-shadow: 0 0 10px var(--primary-red);
         }
 
-        @keyframes scan {
-            100% { left: 100%; }
+        /* --- LOGO --- */
+        .logo-container {
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        .logo-img {
+            max-width: 180px; /* Taille max du logo */
+            height: auto;
+            /* Petit effet de lueur rouge derrière le logo */
+            filter: drop-shadow(0 0 8px rgba(255, 31, 31, 0.3)); 
+        }
+
+        /* --- TEXTES --- */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- BARRE D'ALERTE --- */
+        .alert-box {
+            background: rgba(255, 31, 31, 0.1);
+            border-left: 4px solid var(--primary-red);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .alert-icon {
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-red);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary-red);
+            animation: blink 1.5s infinite;
+        }
+
+        .alert-text {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-red);
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         p.description {
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.6;
-            color: #cce6ff;
+            color: #bbb;
             margin-bottom: 2rem;
-            font-weight: 300;
         }
 
-        .highlight {
-            color: #bc13fe;
-            font-weight: 500;
+        /* --- LOADER PRO --- */
+        .loader-line {
+            width: 100%;
+            height: 2px;
+            background: #333;
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
         }
 
-        /* Petit indicateur de chargement en bas */
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(0, 247, 255, 0.2);
-            border-top: 3px solid #00f7ff;
-            border-radius: 50%;
-            margin: 0 auto;
-            animation: spin 1s linear infinite;
+        .loader-line::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -50%;
+            width: 40%;
+            height: 100%;
+            background: var(--primary-red);
+            animation: load 2s infinite ease-in-out;
+            box-shadow: 0 0 10px var(--primary-red);
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes load {
+            0% { left: -50%; }
+            100% { left: 150%; }
         }
 
-        /* Animation d'apparition globale */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Animation d'entrée */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive pour mobile */
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .status-bar { font-size: 0.9rem; }
-        }
     </style>
 </head>
 <body>
 
-    <div class="background-container"></div>
-    <div class="stars"></div>
+    <div class="grid-bg"></div>
+    <div class="vignette"></div>
 
-    <div class="main-container">
-        <h1>Astral Technologie</h1>
-        
-        <div class="status-bar">
-            SYSTÈME EN COURS D'INITIALISATION
+    <div class="glass-panel">
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo Astral Technologie" class="logo-img">
         </div>
-        
+
+        <h1>Astral Technologie</h1>
+        <div class="subtitle">Infrastructure Numérique Avancée</div>
+
+        <div class="alert-box">
+            <div class="alert-icon"></div>
+            <span class="alert-text">DÉPLOIEMENT EN COURS</span>
+        </div>
+
         <p class="description">
-            Notre infrastructure quantique est actuellement en phase de déploiement. 
-            La plateforme est en construction intensive et <span class="highlight">n'est pas encore accessible au public</span>.
-            <br><br>
-            Préparez-vous pour le futur.
+            Cette plateforme est actuellement en phase de <strong>configuration critique</strong>.
+            L'accès aux services est temporairement verrouillé pour des raisons de maintenance et de sécurisation des données.
         </p>
 
-        <div class="loader"></div>
+        <div class="loader-line"></div>
+        
+        <p style="font-size: 0.7rem; color: #555; margin-top: 15px;">
+            SECURE CONNECTION ESTABLISHED • ENCRYPTED
+        </p>
     </div>
 
 </body>
